@@ -1,0 +1,45 @@
+{
+    "name": "bghelper",
+    "description": "A helper app for various modern board games.",
+    "author": "Andy Christianson",
+    "version": "0.1.0",
+    "license": "MIT",
+    "homepage": "https://nixxed.github.io/bghelper",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/NiXXeD/bghelper"
+    },
+    "dependencies": {
+        "@material-ui/core": "4.5.2",
+        "@material-ui/icons": "4.5.1",
+        "@material-ui/styles": "4.5.2",
+        "gh-pages": "2.1.1",
+        "react": "16.11.0",
+        "react-dom": "16.11.0",
+        "react-masonry-component": "6.2.1",
+        "react-router-dom": "5.1.2",
+        "react-scripts": "3.2.0"
+    },
+    "scripts": {
+        "predeploy": "yarn build",
+        "deploy": "gh-pages -d build",
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
+}
