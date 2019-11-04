@@ -12,7 +12,7 @@ function FoodChainMagnate() {
         {label: 'Milestones', content: <Milestones/>},
         {label: 'Setup', content: <Setup/>}
     ]
-    return <Tabs tabs={tabs}/>
+    return <Tabs title={'Food Chain Magnate'} tabs={tabs}/>
 }
 
 export default FoodChainMagnate

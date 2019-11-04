@@ -5,6 +5,7 @@ import {HashRouter, Route} from 'react-router-dom'
 import Barenpark from './games/barenpark/Barenpark'
 import FoodChainMagnate from './games/foodChainMagnate/FoodChainMagnate'
 import Nav from './nav/Nav'
+import TitleContextProvider from './shared/TitleContextProvider'
 
 const theme = createMuiTheme({
     palette: {
@@ -16,16 +17,20 @@ function App() {
     return (
         <HashRouter>
             <ThemeProvider theme={theme}>
-                <div>
-                    <Nav/>
+                <TitleContextProvider>
+                    <div>
+                        <Nav/>
 
-                    {/* TODO: some sort of default route */}
-                    <Route exact path="/"><div/></Route>
+                        {/* TODO: some sort of default route */}
+                        <Route exact path="/">
+                            <div/>
+                        </Route>
 
-                    {/* Game routes*/}
-                    <Route exact path="/barenpark"><Barenpark/></Route>
-                    <Route exact path="/foodChainMagnate"><FoodChainMagnate/></Route>
-                </div>
+                        {/* Game routes*/}
+                        <Route exact path="/barenpark"><Barenpark/></Route>
+                        <Route exact path="/foodChainMagnate"><FoodChainMagnate/></Route>
+                    </div>
+                </TitleContextProvider>
             </ThemeProvider>
         </HashRouter>
     )

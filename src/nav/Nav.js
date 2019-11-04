@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Tooltip from '@material-ui/core/Tooltip'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
+import TitleContext from '../shared/TitleContext'
 import ExpandIcon from './ExpandIcon'
 import githubSvg from './github.svg'
 import {makeStyles} from '@material-ui/styles'
@@ -21,6 +22,7 @@ import SiteSearch from './SiteSearch'
 
 function Nav() {
     const classes = useStyles()
+    const {title} = useContext(TitleContext)
     const [expandedMenu, setExpandedMenu] = useState(null)
     const [drawerOpen, setDrawerOpen] = useState(false)
 
@@ -40,7 +42,7 @@ function Nav() {
 
                     {/* Title bar */}
                     <Typography variant='h6' className={classes.title}>
-                        Board Game Helper
+                        {title}
                     </Typography>
 
                     {/* Search */}

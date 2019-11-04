@@ -6,7 +6,7 @@ function Barenpark() {
         {label: 'Setup', content: <div/>},
         {label: 'Achievements', content: <div/>},
     ]
-    return <Tabs tabs={tabs}/>
+    return <Tabs title={'Bärenpark'} tabs={tabs}/>
 
 }
 

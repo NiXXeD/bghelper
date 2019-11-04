@@ -1,13 +1,20 @@
-import React, {useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import AppBar from '@material-ui/core/AppBar'
 import MuiTabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
+import TitleContext from './TitleContext'
 
-function Tabs({tabs}) {
+function Tabs({tabs, title}) {
     const classes = useStyles()
     const [tabValue, setTabValue] = useState(0)
     const handleChange = (event, value) => setTabValue(value)
+
+    const {setTitle, clearTitle} = useContext(TitleContext)
+    useEffect(() => {
+        setTitle(title)
+        return () => clearTitle()
+    })
 
     return (
         <React.Fragment>
