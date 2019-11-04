@@ -92,7 +92,6 @@ function Calc() {
 
                     {/* Garden House */}
                     <FormControlLabel
-                        className={classes.switch}
                         label="Garden House"
                         control={
                             <Switch
@@ -104,7 +103,6 @@ function Calc() {
 
                     {/* CFO Bonus */}
                     <FormControlLabel
-                        className={classes.switch}
                         label="CFO Bonus"
                         control={
                             <Switch
@@ -138,9 +136,6 @@ const useStyles = makeStyles({
     },
     select: {
         marginBottom: 24
-    },
-    switch: {
-        marginTop: -6
     }
 })
 
