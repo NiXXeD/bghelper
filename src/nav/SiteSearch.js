@@ -4,7 +4,6 @@ import IconButton from '@material-ui/core/IconButton'
 import SearchIcon from '@material-ui/icons/Search'
 import Tooltip from '@material-ui/core/Tooltip'
 import Dialog from '@material-ui/core/Dialog'
-import Paper from '@material-ui/core/Paper'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import TextField from '@material-ui/core/TextField'
 import {useHistory} from 'react-router-dom'
@@ -53,31 +52,37 @@ function SiteSearch() {
 
             <Dialog
                 keepMounted
+                hideBackdrop
                 open={dialogOpen}
                 onClose={closeDialog}
-                classes={{paper: classes.dialogPaper}}
+                classes={{
+                    paper: classes.dialogPaper,
+                    root: classes.dialogRoot
+                }}
             >
-                <Paper className={classes.paper}>
-                    <Autocomplete
-                        className={classes.autocomplete}
-                        autoComplete
-                        autoHightlight
-                        clearOnEscape
-                        options={games}
-                        value={value}
-                        onChange={handleChange}
-                        getOptionLabel={option => option.label}
-                        renderInput={params => (
-                            <TextField
-                                {...params}
-                                label='Site Search'
-                                variant='outlined'
-                                fullWidth
-                                inputRef={autocomplete}
-                            />
-                        )}
-                    />
-                </Paper>
+                <Autocomplete
+                    className={classes.autocomplete}
+                    autoComplete
+                    autoHightlight
+                    clearOnEscape
+                    options={games}
+                    value={value}
+                    onChange={handleChange}
+                    onClose={closeDialog}
+                    getOptionLabel={option => option.label}
+                    renderInput={params => (
+                        <TextField
+                            {...params}
+                            label='Site Search'
+                            variant='outlined'
+                            fullWidth
+                            inputRef={autocomplete}
+                        />
+                    )}
+                    classes={{
+                        popup: classes.popup
+                    }}
+                />
             </Dialog>
         </React.Fragment>
     )
@@ -101,6 +106,13 @@ const useStyles = makeStyles({
     },
     dialogPaper: {
         overflowY: 'visible'
+    },
+    dialogRoot: {
+        top: '48px !important',
+        bottom: 'unset !important'
+    },
+    popup: {
+        zIndex: 1301
     }
 })
 
