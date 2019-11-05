@@ -52,7 +52,6 @@ function SiteSearch() {
 
             <Dialog
                 keepMounted
-                hideBackdrop
                 open={dialogOpen}
                 onClose={closeDialog}
                 classes={{
