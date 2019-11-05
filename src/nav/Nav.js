@@ -62,7 +62,7 @@ function Nav() {
             {/* Left Drawer*/}
             <SwipeableDrawer open={drawerOpen} onOpen={openDrawer} onClose={closeDrawer} className={classes.drawer}>
                 <Link className={classes.link} to='/'>
-                    <ListItem button>
+                    <ListItem button onClick={closeDrawer}>
                         <ListItemIcon><HomeIcon/></ListItemIcon>
                         <ListItemText primary='Home'/>
                     </ListItem>
