@@ -1,74 +1,37 @@
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Switch from '@material-ui/core/Switch'
 import React, {useState} from 'react'
-import Card from '@material-ui/core/Card/Card'
+import {CardHeader} from '@material-ui/core'
 import CardContent from '@material-ui/core/CardContent'
-import CardHeader from '@material-ui/core/CardHeader'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
-import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
-import FormControl from '@material-ui/core/FormControl'
 import FormGroup from '@material-ui/core/FormGroup'
+import Card from '../../../shared/Card'
+import Checkbox from '../../../shared/Checkbox'
+import Dropdown from '../../../shared/Dropdown'
+import FlexCol from '../../../shared/FlexCol'
+import FlexRow from '../../../shared/FlexRow'
+import FlexSpacer from '../../../shared/FlexSpacer'
 import LabelValueDisplay from '../../../shared/LabelValueDisplay'
-import playerData from './playerData'
-import {makeStyles} from '@material-ui/styles'
+import setupData from './setupData'
 
 function Setup() {
-    const classes = useStyles()
     const [players, setPlayers] = useState(2)
     const [monorails, setMonorails] = useState(false)
     const [grizzlies, setGrizzlies] = useState(false)
-    const data = playerData[players]
+    const data = setupData[players]
 
     return (
-        <Card className={classes.card}>
+        <Card width={350}>
             <CardHeader title="Setup Reference"/>
             <CardContent>
                 <FormGroup>
-                    {/* Players */}
-                    <FormControl>
-                        <InputLabel htmlFor="players">Players</InputLabel>
-                        <Select
-                            className={classes.select}
-                            value={players}
-                            onChange={event => setPlayers(event.target.value)}
-                            input={<Input id="players"/>}
-                        >
-                            {Object.keys(playerData).map(count =>
-                                <MenuItem key={count} value={count}>{`${count} players`}</MenuItem>
-                            )}
-                        </Select>
-                    </FormControl>
+                    <Dropdown label='Players' value={players} onChange={setPlayers} items={playersMenuItems}/>
 
-                    <div className={classes.row}>
-                        {/* Monorails */}
-                        <FormControlLabel
-                            className={classes.switch}
-                            label="Monorails"
-                            control={
-                                <Switch
-                                    checked={monorails}
-                                    onChange={event => setMonorails(event.target.checked)}
-                                />
-                            }
-                        />
+                    <FlexRow>
+                        <Checkbox label="Monorails" checked={monorails} onChange={setMonorails}/>
+                        <FlexSpacer width={16}/>
+                        <Checkbox label="Grizzlies" checked={grizzlies} onChange={setGrizzlies}/>
+                    </FlexRow>
 
-                        {/* Grizzlies */}
-                        <FormControlLabel
-                            className={classes.switch}
-                            label="Grizzlies"
-                            control={
-                                <Switch
-                                    checked={grizzlies}
-                                    onChange={event => setGrizzlies(event.target.checked)}
-                                />
-                            }
-                        />
-                    </div>
-
-                    <div className={classes.row}>
-                        <div className={classes.col}>
+                    <FlexRow>
+                        <FlexCol width={140}>
                             <LabelValueDisplay label='Toilets' value={grizzlies ? data.grizzlyToilets : data.toilets}/>
                             <LabelValueDisplay label='Playgrounds' value={data.playgrounds}/>
                             <LabelValueDisplay
@@ -76,9 +39,11 @@ function Setup() {
                                 value={grizzlies ? data.grizzlyAnimalHouses : data.animalHouses}
                             />
                             {monorails && <LabelValueDisplay label='Monorail Towers' value={data.monorailTowers}/>}
-                        </div>
+                        </FlexCol>
 
-                        <div className={classes.col}>
+                        <FlexSpacer width={24}/>
+
+                        <FlexCol width={140}>
                             <LabelValueDisplay label='Food Streets' value={data.foodStreets}/>
                             <LabelValueDisplay label='Rivers' value={data.rivers}/>
                             <LabelValueDisplay
@@ -86,37 +51,14 @@ function Setup() {
                                 value={grizzlies ? data.grizzlyBearStatues : data.bearStatues}
                             />
                             {monorails && <LabelValueDisplay label='Monorail Cars' value={data.monorailCars}/>}
-                        </div>
-                    </div>
+                        </FlexCol>
+                    </FlexRow>
                 </FormGroup>
             </CardContent>
         </Card>
     )
 }
 
-const useStyles = makeStyles({
-    card: {
-        margin: 16,
-        maxWidth: 350
-    },
-    subheading: {
-        marginTop: 16
-    },
-    select: {
-        marginBottom: 8
-    },
-    switch: {
-        marginRight: 32
-    },
-    row: {
-        display: 'flex',
-        flexDirection: 'row'
-    },
-    col: {
-        display: 'flex',
-        flexDirection: 'column',
-        marginRight: 24
-    }
-})
+const playersMenuItems = Object.keys(setupData).map(value => ({label: `${value} players`, value}))
 
 export default Setup

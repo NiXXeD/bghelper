@@ -29,6 +29,6 @@ const useStyles = makeStyles(theme => ({
         color: 'darkgreen',
         textAlign: 'right'
     }
-}), {useTheme: true})
+}))
 
 export default Profit

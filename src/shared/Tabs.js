@@ -31,7 +31,9 @@ function Tabs({tabs, title}) {
             </AppBar>
 
             {/* Content area */}
-            {tabs.map(({content}, index) => tabValue === index ? content : null)}
+            {tabs.map(({content}, index) =>
+                tabValue === index ? <React.Fragment key={index}>{content}</React.Fragment> : null
+            )}
         </React.Fragment>
     )
 }

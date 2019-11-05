@@ -1,19 +1,16 @@
 import React, {useState} from 'react'
-import Card from '@material-ui/core/Card/Card'
+import Card from '../../../shared/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardHeader from '@material-ui/core/CardHeader'
 import FormGroup from '@material-ui/core/FormGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Switch from '@material-ui/core/Switch'
 import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
+import TextField from '../../../shared/TextField'
+import Checkbox from '../../../shared/Checkbox'
 import UnitPrices from './UnitPrices'
 import Profit from './Profit'
-import {makeStyles} from '@material-ui/styles'
 
 function BulkCalc() {
-    const classes = useStyles()
     const [unitPrice, setUnitPrice] = useState(defaultState.unitPrice)
     const [normalSales, setNormalSales] = useState(defaultState.normalSales)
     const [gardenSales, setGardenSales] = useState(defaultState.gardenSales)
@@ -35,58 +32,34 @@ function BulkCalc() {
     }
 
     return (
-        <Card className={classes.card}>
+        <Card>
             <CardHeader title="Bulk Sale Calculator"/>
             <CardContent>
                 <FormGroup>
-                    {/* Unit Price */}
-                    <UnitPrices
-                        className={classes.field}
-                        value={unitPrice}
-                        onChange={event => setUnitPrice(event.target.value)}
-                    />
+                    <UnitPrices value={unitPrice} onChange={setUnitPrice}/>
 
-                    {/* Normal Sales */}
                     <TextField
-                        className={classes.field}
-                        name="normalSales"
+                        type="number"
                         label="Normal Sales"
                         value={normalSales}
-                        type="number"
-                        onChange={event => setNormalSales(event.target.value)}
+                        onChange={setNormalSales}
                     />
 
-                    {/* Garden Sales */}
                     <TextField
-                        className={classes.field}
-                        name="gardenSales"
+                        type="number"
                         label="Garden Sales"
                         value={gardenSales}
-                        type="number"
-                        onChange={event => setGardenSales(event.target.value)}
+                        onChange={setGardenSales}
                     />
 
-                    {/* Marketing Bonuses */}
                     <TextField
-                        className={classes.field}
-                        name="marketingBonuses"
+                        type="number"
                         label="Marketing Bonuses"
                         value={marketingBonuses}
-                        type="number"
-                        onChange={event => setMarketingBonuses(event.target.value)}
+                        onChange={setMarketingBonuses}
                     />
 
-                    {/* CFO Bonus */}
-                    <FormControlLabel
-                        className={classes.switch}
-                        label="CFO Bonus"
-                        control={
-                            <Switch
-                                checked={cfo}
-                                onChange={event => setCfo(event.target.checked)}
-                            />
-                        }
-                    />
+                    <Checkbox label="CFO Bonus" checked={cfo} onChange={setCfo}/>
                 </FormGroup>
             </CardContent>
             <CardActions>
@@ -104,18 +77,5 @@ const defaultState = {
     marketingBonuses: 0,
     cfo: false
 }
-
-const useStyles = makeStyles({
-    card: {
-        margin: 16,
-        maxWidth: 275
-    },
-    field: {
-        marginBottom: 24
-    },
-    switch: {
-        marginTop: -6
-    }
-})
 
 export default BulkCalc
