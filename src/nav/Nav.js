@@ -16,8 +16,10 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import ExtensionIcon from '@material-ui/icons/Extension'
+import HomeIcon from '@material-ui/icons/Home'
 import BuildIcon from '@material-ui/icons/Build'
 import Collapse from '@material-ui/core/Collapse'
+import Divider from '@material-ui/core/Divider'
 import SiteSearch from './SiteSearch'
 
 function Nav() {
@@ -59,6 +61,15 @@ function Nav() {
 
             {/* Left Drawer*/}
             <SwipeableDrawer open={drawerOpen} onOpen={openDrawer} onClose={closeDrawer} className={classes.drawer}>
+                <Link className={classes.link} to='/'>
+                    <ListItem button>
+                        <ListItemIcon><HomeIcon/></ListItemIcon>
+                        <ListItemText primary='Home'/>
+                    </ListItem>
+                </Link>
+
+                <Divider/>
+
                 <List>
                     {/* Games list */}
                     <ListItem button onClick={handleExpand('games')}>

@@ -4,6 +4,7 @@ import {ThemeProvider} from '@material-ui/styles'
 import {HashRouter, Route} from 'react-router-dom'
 import Barenpark from './games/barenpark/Barenpark'
 import FoodChainMagnate from './games/foodChainMagnate/FoodChainMagnate'
+import Home from './nav/Home'
 import Nav from './nav/Nav'
 import TitleContextProvider from './shared/TitleContextProvider'
 
@@ -21,10 +22,7 @@ function App() {
                     <div>
                         <Nav/>
 
-                        {/* TODO: some sort of default route */}
-                        <Route exact path="/">
-                            <div/>
-                        </Route>
+                        <Route exact path="/"><Home/></Route>
 
                         {/* Game routes*/}
                         <Route exact path="/barenpark"><Barenpark/></Route>

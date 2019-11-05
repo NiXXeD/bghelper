@@ -1,19 +1,107 @@
-import React, {useState} from 'react'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
+import makeStyles from '@material-ui/core/styles/makeStyles'
 import IconButton from '@material-ui/core/IconButton'
 import SearchIcon from '@material-ui/icons/Search'
 import Tooltip from '@material-ui/core/Tooltip'
+import Dialog from '@material-ui/core/Dialog'
+import Paper from '@material-ui/core/Paper'
+import Autocomplete from '@material-ui/lab/Autocomplete'
+import TextField from '@material-ui/core/TextField'
+import {useHistory} from 'react-router-dom'
 
 function SiteSearch() {
-    const [searchOpen, setSearchOpen] = useState(false)
-    const toggleSearch = () => setSearchOpen(!searchOpen)
+    const classes = useStyles()
+    const history = useHistory()
+    const [dialogOpen, setDialogOpen] = useState(false)
+    const [value, setValue] = useState(null)
+    const openDialog = () => setDialogOpen(true)
+    const closeDialog = () => setDialogOpen(false)
+    const autocomplete = useRef(null)
+
+    const handleKeyUp = useCallback(event => {
+        if (event.key === '.' && !excludedTags.includes(event.target.tagName)) {
+            openDialog()
+        }
+    }, [])
+
+    useEffect(() => {
+        if (dialogOpen && autocomplete && autocomplete.current) {
+            setTimeout(() => autocomplete.current.focus(), 125)
+        }
+    }, [dialogOpen, autocomplete])
+
+    useEffect(() => {
+        document.addEventListener('keyup', handleKeyUp)
+        return () => document.removeEventListener('keyup', handleKeyUp)
+    }, [handleKeyUp])
+
+    const handleChange = (event, value) => {
+        if (value) {
+            history.push(value.path)
+            setValue(null)
+            closeDialog()
+        }
+    }
 
     return (
-        <Tooltip title='Site Search'>
-            <IconButton onClick={toggleSearch}>
-                <SearchIcon/>
-            </IconButton>
-        </Tooltip>
+        <React.Fragment>
+            <Tooltip title='Site Search'>
+                <IconButton onClick={openDialog}>
+                    <SearchIcon/>
+                </IconButton>
+            </Tooltip>
+
+            <Dialog
+                keepMounted
+                open={dialogOpen}
+                onClose={closeDialog}
+                classes={{paper: classes.dialogPaper}}
+            >
+                <Paper className={classes.paper}>
+                    <Autocomplete
+                        className={classes.autocomplete}
+                        autoComplete
+                        autoHightlight
+                        clearOnEscape
+                        options={games}
+                        value={value}
+                        onChange={handleChange}
+                        getOptionLabel={option => option.label}
+                        renderInput={params => (
+                            <TextField
+                                {...params}
+                                label='Site Search'
+                                variant='outlined'
+                                fullWidth
+                                inputRef={autocomplete}
+                            />
+                        )}
+                    />
+                </Paper>
+            </Dialog>
+        </React.Fragment>
     )
 }
+
+const games = [
+    {label: 'Home', path: '/'},
+    {label: 'Bärenpark', path: '/barenpark'},
+    {label: 'Food Chain Magnate', path: '/foodChainMagnate'}
+]
+
+const excludedTags = [
+    'INPUT',
+    'TEXTAREA',
+    'SELECT'
+]
+
+const useStyles = makeStyles({
+    autocomplete: {
+        width: 300
+    },
+    dialogPaper: {
+        overflowY: 'visible'
+    }
+})
 
 export default SiteSearch
