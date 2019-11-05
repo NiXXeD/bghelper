@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/bghelper/static/css/main.5e56a34f.chunk.css",
-    "main.js": "/bghelper/static/js/main.ea6ff23d.chunk.js",
-    "main.js.map": "/bghelper/static/js/main.ea6ff23d.chunk.js.map",
+    "main.js": "/bghelper/static/js/main.16a2c3d2.chunk.js",
+    "main.js.map": "/bghelper/static/js/main.16a2c3d2.chunk.js.map",
     "runtime-main.js": "/bghelper/static/js/runtime-main.8fe7d613.js",
     "runtime-main.js.map": "/bghelper/static/js/runtime-main.8fe7d613.js.map",
     "static/js/2.1a7c2979.chunk.js": "/bghelper/static/js/2.1a7c2979.chunk.js",
     "static/js/2.1a7c2979.chunk.js.map": "/bghelper/static/js/2.1a7c2979.chunk.js.map",
     "index.html": "/bghelper/index.html",
-    "precache-manifest.c3d41c442652af990e7fbd162f8fb314.js": "/bghelper/precache-manifest.c3d41c442652af990e7fbd162f8fb314.js",
+    "precache-manifest.44d081732f007129123382265fa87950.js": "/bghelper/precache-manifest.44d081732f007129123382265fa87950.js",
     "service-worker.js": "/bghelper/service-worker.js",
     "static/css/main.5e56a34f.chunk.css.map": "/bghelper/static/css/main.5e56a34f.chunk.css.map",
     "static/media/github.svg": "/bghelper/static/media/github.7337e417.svg"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.8fe7d613.js",
     "static/js/2.1a7c2979.chunk.js",
     "static/css/main.5e56a34f.chunk.css",
-    "static/js/main.ea6ff23d.chunk.js"
+    "static/js/main.16a2c3d2.chunk.js"
   ]
 }
