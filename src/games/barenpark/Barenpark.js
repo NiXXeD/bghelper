@@ -6,7 +6,7 @@ import Setup from './setup/Setup'
 function Barenpark() {
     const tabs = [
         {label: 'Setup', content: <Setup/>},
-        {label: 'Achievements', content: <Achievements/>},
+        {label: 'Achievements', content: <Achievements/>}
     ]
     return <Tabs title={'Bärenpark'} tabs={tabs}/>
 

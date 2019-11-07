@@ -2,8 +2,7 @@ import React from 'react'
 import {createMuiTheme} from '@material-ui/core/styles'
 import {ThemeProvider} from '@material-ui/styles'
 import {HashRouter, Route} from 'react-router-dom'
-import Barenpark from './games/barenpark/Barenpark'
-import FoodChainMagnate from './games/foodChainMagnate/FoodChainMagnate'
+import games from './games/games'
 import Home from './nav/Home'
 import Nav from './nav/Nav'
 import TitleContextProvider from './shared/TitleContextProvider'
@@ -25,8 +24,11 @@ function App() {
                         <Route exact path="/"><Home/></Route>
 
                         {/* Game routes*/}
-                        <Route exact path="/barenpark"><Barenpark/></Route>
-                        <Route exact path="/foodChainMagnate"><FoodChainMagnate/></Route>
+                        {games.map(({path, component: Component}) =>
+                            <Route exact path={path}>
+                                <Component/>
+                            </Route>
+                        )}
                     </div>
                 </TitleContextProvider>
             </ThemeProvider>

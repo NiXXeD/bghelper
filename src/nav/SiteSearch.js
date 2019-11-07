@@ -7,6 +7,7 @@ import Dialog from '@material-ui/core/Dialog'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import TextField from '@material-ui/core/TextField'
 import {useHistory} from 'react-router-dom'
+import games from '../games/games'
 
 function SiteSearch() {
     const classes = useStyles()
@@ -68,7 +69,7 @@ function SiteSearch() {
                     value={value}
                     onChange={handleChange}
                     onClose={closeDialog}
-                    getOptionLabel={option => option.label}
+                    getOptionLabel={option => option.name}
                     renderInput={params => (
                         <TextField
                             {...params}
@@ -86,12 +87,6 @@ function SiteSearch() {
         </React.Fragment>
     )
 }
-
-const games = [
-    {label: 'Home', path: '/'},
-    {label: 'Bärenpark', path: '/barenpark'},
-    {label: 'Food Chain Magnate', path: '/foodChainMagnate'}
-]
 
 const excludedTags = [
     'INPUT',

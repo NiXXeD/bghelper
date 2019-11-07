@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
+import games from '../games/games'
 import TitleContext from '../shared/TitleContext'
 import ExpandIcon from './ExpandIcon'
 import githubSvg from './github.svg'
@@ -60,7 +61,7 @@ function Nav() {
             </AppBar>
 
             {/* Left Drawer*/}
-            <SwipeableDrawer open={drawerOpen} onOpen={openDrawer} onClose={closeDrawer} className={classes.drawer}>
+            <SwipeableDrawer open={drawerOpen} onOpen={openDrawer} onClose={closeDrawer} classes={{paper: classes.drawerPaper}}>
                 <Link className={classes.link} to='/'>
                     <ListItem button onClick={closeDrawer}>
                         <ListItemIcon><HomeIcon/></ListItemIcon>
@@ -78,16 +79,13 @@ function Nav() {
                         <ExpandIcon open={expandedMenu === 'games'}/>
                     </ListItem>
                     <Collapse in={expandedMenu === 'games'} timeout='auto'>
-                        <Link className={classes.link} to='/barenpark'>
-                            <ListItem className={classes.nested} button onClick={closeDrawer}>
-                                <ListItemText primary='Bärenpark'/>
-                            </ListItem>
-                        </Link>
-                        <Link className={classes.link} to='/foodChainMagnate'>
-                            <ListItem className={classes.nested} button onClick={closeDrawer}>
-                                <ListItemText primary='Food Chain Magnate'/>
-                            </ListItem>
-                        </Link>
+                        {games.map(({path, name}) =>
+                            <Link className={classes.link} to={path}>
+                                <ListItem className={classes.nested} button onClick={closeDrawer}>
+                                    <ListItemText primary={name}/>
+                                </ListItem>
+                            </Link>
+                        )}
                     </Collapse>
 
                     {/* Utilities */}
@@ -108,8 +106,8 @@ function Nav() {
 }
 
 const useStyles = makeStyles(theme => ({
-    drawer: {
-        width: 300
+    drawerPaper: {
+        width: 225
     },
     toolbar: {
         paddingLeft: 8,
