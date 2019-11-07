@@ -31,6 +31,24 @@ function Setup() {
                     </FlexRow>
 
                     <FlexRow>
+                        <LabelValueDisplay
+                            label='Starting Tile'
+                            value={
+                                <FlexRow>
+                                    <FlexCol width={140}>
+                                        <span><b>P1:</b>&nbsp;Toilet</span>
+                                        {players > 2 && <span><b>P3:</b>&nbsp;Playground</span>}
+                                    </FlexCol>
+                                    <FlexCol width={140}>
+                                        <span><b>P2:</b>&nbsp;Playground</span>
+                                        {players > 3 && <span><b>P4:</b>&nbsp;Food Street</span>}
+                                    </FlexCol>
+                                </FlexRow>
+                            }
+                        />
+                    </FlexRow>
+
+                    <FlexRow>
                         <FlexCol width={140}>
                             <LabelValueDisplay label='Toilets' value={grizzlies ? data.grizzlyToilets : data.toilets}/>
                             <LabelValueDisplay label='Playgrounds' value={data.playgrounds}/>

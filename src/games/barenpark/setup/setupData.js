@@ -10,7 +10,8 @@ export default {
         monorailCars: '2 each; 10, 8, 6, 5, 4, 3',
         grizzlyToilets: 18,
         grizzlyAnimalHouses: '2, 4, 6, 8',
-        grizzlyBearStatues: 'Evens; 2 - 20'
+        grizzlyBearStatues: 'Evens; 2 - 20',
+        players: ['Toilet', 'Playground']
     },
     3: {
         toilets: 10,
@@ -23,7 +24,8 @@ export default {
         monorailCars: '3 each; 10, 8, 6, 5, 4, 3',
         grizzlyToilets: 18,
         grizzlyAnimalHouses: '2 - 7',
-        grizzlyBearStatues: '3 - 17'
+        grizzlyBearStatues: '3 - 17',
+        players: ['Toilet', 'Playground', 'Playground']
     },
     4: {
         toilets: 10,
@@ -36,6 +38,7 @@ export default {
         monorailCars: '4 each; 10, 8, 6, 5, 4, 3',
         grizzlyToilets: 18,
         grizzlyAnimalHouses: '1 - 8',
-        grizzlyBearStatues: '1 - 20'
+        grizzlyBearStatues: '1 - 20',
+        players: ['Toilet', 'Playground', 'Playground', 'Food Street']
     }
 }
