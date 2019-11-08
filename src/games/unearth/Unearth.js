@@ -1,12 +1,12 @@
 import React from 'react'
 import Tabs from '../../shared/Tabs'
 
-function RollPlayer() {
+function Unearth() {
     const tabs = [
         {label: 'Setup', content: <div/>}
     ]
-    return <Tabs title={'Roll Player'} tabs={tabs}/>
+    return <Tabs title={'Unearth'} tabs={tabs}/>
 
 }
 
-export default RollPlayer
+export default Unearth

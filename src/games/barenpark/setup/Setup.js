@@ -13,8 +13,8 @@ import setupData from './setupData'
 
 function Setup() {
     const [players, setPlayers] = useState(2)
-    const [monorails, setMonorails] = useState(false)
-    const [grizzlies, setGrizzlies] = useState(false)
+    const [monorails, setMonorails] = useState(true)
+    const [grizzlies, setGrizzlies] = useState(true)
     const data = setupData[players]
 
     return (
@@ -26,7 +26,7 @@ function Setup() {
 
                     <FlexRow>
                         <Checkbox label="Monorails" checked={monorails} onChange={setMonorails}/>
-                        <FlexSpacer width={16}/>
+                        <FlexSpacer size={16}/>
                         <Checkbox label="Grizzlies" checked={grizzlies} onChange={setGrizzlies}/>
                     </FlexRow>
 
@@ -59,7 +59,7 @@ function Setup() {
                             {monorails && <LabelValueDisplay label='Monorail Towers' value={data.monorailTowers}/>}
                         </FlexCol>
 
-                        <FlexSpacer width={24}/>
+                        <FlexSpacer size={24}/>
 
                         <FlexCol width={140}>
                             <LabelValueDisplay label='Food Streets' value={data.foodStreets}/>
