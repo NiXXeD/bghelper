@@ -13,7 +13,7 @@ export default [
 
     // Bad News Bears
     {name: 'Construction Freeze', type: 'enclosures', game: 'badNewsBears'},
-    {name: 'Enclusre Planning', type: 'enclosures', game: 'badNewsBears'},
+    {name: 'Enclosure Planning', type: 'enclosures', game: 'badNewsBears'},
     {name: 'Toilets Apart', type: 'greenTiles', game: 'badNewsBears'},
     {name: 'Food Street Connections', type: 'greenTiles', game: 'badNewsBears'},
     {name: 'Rivers in Corners', type: 'greenTiles', game: 'badNewsBears'},
