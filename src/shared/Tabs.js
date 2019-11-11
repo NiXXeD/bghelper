@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar'
 import MuiTabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import TitleContext from './TitleContext'
+import Box from '@material-ui/core/Box'
 
 function Tabs({tabs, title}) {
     const classes = useStyles()
@@ -32,7 +33,7 @@ function Tabs({tabs, title}) {
 
             {/* Content area */}
             {tabs.map(({content}, index) =>
-                tabValue === index ? <React.Fragment key={index}>{content}</React.Fragment> : null
+                <Box key={index} display={tabValue === index ? null : 'none'}>{content}</Box>
             )}
         </React.Fragment>
     )
