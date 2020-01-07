@@ -25,7 +25,7 @@ function App() {
 
                         {/* Game routes*/}
                         {games.map(({path, component: Component}) =>
-                            <Route exact path={path}>
+                            <Route exact path={path} key={path}>
                                 <Component/>
                             </Route>
                         )}

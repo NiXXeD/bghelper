@@ -80,7 +80,7 @@ function Nav() {
                     </ListItem>
                     <Collapse in={expandedMenu === 'games'} timeout='auto'>
                         {games.map(({path, name}) =>
-                            <Link className={classes.link} to={path}>
+                            <Link key={path} className={classes.link} to={path}>
                                 <ListItem className={classes.nested} button onClick={closeDrawer}>
                                     <ListItemText primary={name}/>
                                 </ListItem>
