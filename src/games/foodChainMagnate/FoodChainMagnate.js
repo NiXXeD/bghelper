@@ -7,9 +7,9 @@ import Setup from './setup/Setup'
 
 function FoodChainMagnate() {
     const tabs = [
+        {label: 'Milestones', content: <Milestones/>},
         {label: 'Simple Sales', content: <Calc/>},
         {label: 'Bulk Sales', content: <BulkCalc/>},
-        {label: 'Milestones', content: <Milestones/>},
         {label: 'Setup', content: <Setup/>}
     ]
     return <Tabs title={'Food Chain Magnate'} tabs={tabs}/>

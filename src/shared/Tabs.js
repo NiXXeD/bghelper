@@ -9,18 +9,13 @@ import Box from '@material-ui/core/Box'
 function Tabs({tabs, title}) {
     const classes = useStyles()
     const [tabValue, setTabValue] = useState(0)
-    const handleChange = (event, value) => {
-        setTabValue(value)
-
-        // allows masonry components to adjust layout as necessary
-        window.dispatchEvent(new Event('resize'))
-    }
+    const handleChange = (event, value) => setTabValue(value)
 
     const {setTitle, clearTitle} = useContext(TitleContext)
     useEffect(() => {
         setTitle(title)
         return () => clearTitle()
-    })
+    }, [clearTitle, setTitle, title])
 
     return (
         <React.Fragment>
@@ -38,7 +33,7 @@ function Tabs({tabs, title}) {
 
             {/* Content area */}
             {tabs.map(({content}, index) =>
-                <Box key={index} display={tabValue === index ? null : 'none'}>{content}</Box>
+                <Box key={index} display={tabValue === index ? 'block' : 'none'}>{content}</Box>
             )}
         </React.Fragment>
     )
