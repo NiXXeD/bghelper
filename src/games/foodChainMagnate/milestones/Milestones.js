@@ -1,4 +1,5 @@
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import {makeStyles} from '@material-ui/styles'
 import React, {useEffect, useState} from 'react'
 import Card from '../../../shared/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -14,6 +15,8 @@ import RadioGroup from '@material-ui/core/RadioGroup'
 import Radio from '@material-ui/core/Radio'
 
 function Milestones() {
+    const classes = useStyles()
+
     const getDataArray = (type = milestoneType) => {
         const data = type === 'original' ? originalMilestoneData : alternateMilestoneData
         return data.map(() => 'available')
@@ -73,7 +76,7 @@ function Milestones() {
     return (
         <Card width='auto' maxWidth={900}>
             <CardHeader title="Milestone Tracker"/>
-            <CardContent>
+            <CardContent className={classes.content}>
                 <Masonry>
                     {milestones.map((value, key) =>
                         <Milestone
@@ -113,6 +116,12 @@ function Milestones() {
         </Card>
     )
 }
+
+const useStyles = makeStyles({
+    content: {
+        padding: 8
+    }
+})
 
 export const localStorageKey = 'milestones'
 

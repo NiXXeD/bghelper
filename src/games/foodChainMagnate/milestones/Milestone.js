@@ -33,7 +33,7 @@ function Milestone({index, milestone, onChange, value}) {
 
 const useStyles = makeStyles({
     milestone: {
-        margin: 8,
+        margin: 4,
         width: 155,
         height: 155,
         userSelect: 'none',
@@ -42,7 +42,7 @@ const useStyles = makeStyles({
         borderRadius: 10
     },
     container: {
-        margin: 6
+        margin: 4
     },
     title: {
         textAlign: 'center',
