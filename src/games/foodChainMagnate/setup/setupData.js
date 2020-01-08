@@ -22,5 +22,11 @@ export default {
         employees: '3',
         billboards: 'None',
         reserve: '$250'
+    },
+    6: {
+        mapSize: '4x6 (use New Districts)',
+        employeesS: '3',
+        billboards: 'None',
+        reserve: '$300'
     }
 }
