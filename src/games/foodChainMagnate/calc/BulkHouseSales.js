@@ -16,14 +16,16 @@ function BulkHouseSales() {
     const [gardenOrParkSales, setGardenOrParkSales] = useState(defaultState.gardenOrParkSales)
     const [gardenAndParkSales, setGardenAndParkSales] = useState(defaultState.gardenAndParkSales)
     const [marketingBonuses, setMarketingBonuses] = useState(defaultState.marketingBonuses)
+    const [frySales, setFrySales] = useState(defaultState.frySales)
     const [cfo, setCfo] = useState(defaultState.cfo)
 
     const cfoMultiplier = cfo ? 1.5 : 1
     const normalProfit = normalSales * unitPrice
     const gardenOrParkProfit = gardenOrParkSales * unitPrice * 2
     const gardenAndParkProfit = gardenAndParkSales * unitPrice * 3
+    const fryProfit = frySales * 10
     const marketingProfit = (marketingBonuses * 5)
-    const profit = Math.ceil(cfoMultiplier * (normalProfit + gardenOrParkProfit + gardenAndParkProfit + marketingProfit))
+    const profit = Math.ceil(cfoMultiplier * (normalProfit + gardenOrParkProfit + gardenAndParkProfit + marketingProfit + fryProfit))
 
     const reset = () => {
         setUnitPrice(defaultState.unitPrice)
@@ -31,49 +33,62 @@ function BulkHouseSales() {
         setGardenOrParkSales(defaultState.gardenOrParkSales)
         setGardenAndParkSales(defaultState.gardenAndParkSales)
         setMarketingBonuses(defaultState.marketingBonuses)
+        setFrySales(defaultState.frySales)
         setCfo(defaultState.cfo)
     }
 
     return (
         <Card>
-            <CardHeader title="Bulk Sale Calculator"/>
+            <CardHeader title='Bulk Sale Calculator'/>
             <CardContent>
                 <FormGroup>
                     <UnitPrices value={unitPrice} onChange={setUnitPrice}/>
 
                     <TextField
-                        type="number"
-                        label="Normal Sales"
+                        type='number'
+                        label='Normal Sales'
                         value={normalSales}
                         onChange={setNormalSales}
+                        helperText='Regular demand, Coffee, Kimchi, Sushi, and Noodles.'
                     />
 
                     <TextField
-                        type="number"
-                        label="Either Garden or Park Sales"
+                        type='number'
+                        label='Either Garden or Park Sales'
                         value={gardenOrParkSales}
                         onChange={setGardenOrParkSales}
+                        helperText='Items sold on either Garden or Park (not both).'
                     />
 
                     <TextField
-                        type="number"
-                        label="Both Garden and Park Sales"
+                        type='number'
+                        label='Both Garden and Park Sales'
                         value={gardenAndParkSales}
                         onChange={setGardenAndParkSales}
+                        helperText='Items sold on both Garden and Park.'
                     />
 
                     <TextField
-                        type="number"
-                        label="Marketing Bonuses"
+                        type='number'
+                        label='Marketing Bonuses'
                         value={marketingBonuses}
                         onChange={setMarketingBonuses}
+                        helperText='Bonuses from first sale milestones.'
                     />
 
-                    <Checkbox label="CFO Bonus" checked={cfo} onChange={setCfo}/>
+                    <TextField
+                        type='number'
+                        label='Fry Sales'
+                        value={frySales}
+                        onChange={setFrySales}
+                        helperText='Number of fries sold.'
+                    />
+
+                    <Checkbox label='CFO Bonus' checked={cfo} onChange={setCfo}/>
                 </FormGroup>
             </CardContent>
             <CardActions>
-                <Button color="secondary" onClick={reset}>Reset</Button>
+                <Button color='secondary' onClick={reset}>Reset</Button>
                 <Profit value={profit}/>
             </CardActions>
         </Card>
@@ -85,6 +100,7 @@ const defaultState = {
     normalSales: 0,
     gardenOrParkSales: 0,
     gardenAndParkSales: 0,
+    frySales: 0,
     marketingBonuses: 0,
     cfo: false
 }

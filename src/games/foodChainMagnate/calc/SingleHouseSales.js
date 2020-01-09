@@ -17,6 +17,7 @@ function SingleHouseSales() {
     const [park, setPark] = useState(defaultState.park)
     const [itemsSold, setItemsSold] = useState(defaultState.itemsSold)
     const [specialItemsSold, setSpecialItemsSold] = useState(defaultState.specialItemsSold)
+    const [friesSold, setFriesSold] = useState(defaultState.friesSold)
     const [unitPrice, setUnitPrice] = useState(defaultState.unitPrice)
 
     const salesError = !garden && itemsSold > 3
@@ -30,17 +31,18 @@ function SingleHouseSales() {
 
     const reset = () => {
         setBonusItemsSold(defaultState.bonusItemsSold)
-        setSpecialItemsSold(defaultState.specialItemsSold)
         setCfo(defaultState.cfo)
         setGarden(defaultState.garden)
         setPark(defaultState.park)
         setItemsSold(defaultState.itemsSold)
+        setSpecialItemsSold(defaultState.specialItemsSold)
+        setFriesSold(defaultState.friesSold)
         setUnitPrice(defaultState.unitPrice)
     }
 
     return (
         <Card>
-            <CardHeader title="Single Sale Calculator"/>
+            <CardHeader title='Single Sale Calculator'/>
             <CardContent>
                 <FormGroup>
                     <UnitPrices
@@ -55,7 +57,7 @@ function SingleHouseSales() {
                         items={itemsSoldMenuItems}
                         error={salesError}
                         errorText='Items sold must be at most 3 for regular house.'
-                        helperText='Regular demand items sold on a house.'
+                        helperText='Regular demand items sold.'
                     />
 
                     <Dropdown
@@ -72,17 +74,25 @@ function SingleHouseSales() {
                         label='Special Items Sold'
                         value={specialItemsSold}
                         onChange={setSpecialItemsSold}
-                        items={specialItemsSoldMenuItems}
+                        items={itemsSoldMenuItems}
                         helperText='Includes Coffee, Kimchi, Sushi, and Noodles.'
                     />
 
-                    <Checkbox label="Garden House" checked={garden} onChange={setGarden}/>
-                    <Checkbox label="Park Bonus" checked={park} onChange={setPark}/>
-                    <Checkbox label="CFO Bonus" checked={cfo} onChange={setCfo}/>
+                    <Dropdown
+                        label='Fries Sold'
+                        value={friesSold}
+                        onChange={setFriesSold}
+                        items={itemsSoldMenuItems}
+                        helperText='Includes Coffee, Kimchi, Sushi, and Noodles.'
+                    />
+
+                    <Checkbox label='Garden House' checked={garden} onChange={setGarden}/>
+                    <Checkbox label='Park Bonus' checked={park} onChange={setPark}/>
+                    <Checkbox label='CFO Bonus' checked={cfo} onChange={setCfo}/>
                 </FormGroup>
             </CardContent>
             <CardActions>
-                <Button color="secondary" onClick={reset}>Reset</Button>
+                <Button color='secondary' onClick={reset}>Reset</Button>
                 <Profit value={profit}/>
             </CardActions>
         </Card>
@@ -90,7 +100,6 @@ function SingleHouseSales() {
 }
 
 const itemsSoldMenuItems = [...new Array(26)].map((_, value) => ({label: `${value} item(s) sold`, value}))
-const specialItemsSoldMenuItems = [...new Array(26)].map((_, value) => ({label: `${value} items(s) sold`, value}))
 const bonusSalesMenuItems = [...new Array(26)].map((_, value) => ({label: `${value} bonus(es)`, value}))
 
 const defaultState = {
@@ -101,6 +110,7 @@ const defaultState = {
     itemsSold: 1,
     coffeeSold: 0,
     specialItemsSold: 0,
+    friesSold: 0,
     unitPrice: 10
 }
 
