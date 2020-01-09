@@ -10,6 +10,7 @@ function UnitPrices(props) {
         <Dropdown
             label='Unit Price'
             items={items}
+            helperText='Final sale price of goods sold.'
             {...props}
         />
     )

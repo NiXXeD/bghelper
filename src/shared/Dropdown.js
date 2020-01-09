@@ -7,7 +7,7 @@ import Select from '@material-ui/core/Select'
 import {makeStyles} from '@material-ui/styles'
 import React from 'react'
 
-function Dropdown({label, value, onChange, items, error, errorText}) {
+function Dropdown({label, value, onChange, items, error, errorText, helperText}) {
     const classes = useStyles()
     return (
         <FormControl className={classes.select}>
@@ -26,7 +26,8 @@ function Dropdown({label, value, onChange, items, error, errorText}) {
             >
                 {items.map(({label, value}, key) => <MenuItem key={key} value={value}>{label}</MenuItem>)}
             </Select>
-            {error && <FormHelperText error>{errorText}</FormHelperText>}
+            {!error && helperText && <FormHelperText className={classes.helperText}>{helperText}</FormHelperText>}
+            {error && <FormHelperText error className={classes.helperText}>{errorText}</FormHelperText>}
         </FormControl>
     )
 }
@@ -34,6 +35,10 @@ function Dropdown({label, value, onChange, items, error, errorText}) {
 const useStyles = makeStyles({
     select: {
         marginBottom: 16
+    },
+    helperText: {
+        cursor: 'default',
+        userSelect: 'none'
     }
 })
 

@@ -10,23 +10,26 @@ import Checkbox from '../../../shared/Checkbox'
 import UnitPrices from './UnitPrices'
 import Profit from './Profit'
 
-function BulkCalc() {
+function BulkHouseSales() {
     const [unitPrice, setUnitPrice] = useState(defaultState.unitPrice)
     const [normalSales, setNormalSales] = useState(defaultState.normalSales)
-    const [gardenSales, setGardenSales] = useState(defaultState.gardenSales)
+    const [gardenOrParkSales, setGardenOrParkSales] = useState(defaultState.gardenOrParkSales)
+    const [gardenAndParkSales, setGardenAndParkSales] = useState(defaultState.gardenAndParkSales)
     const [marketingBonuses, setMarketingBonuses] = useState(defaultState.marketingBonuses)
     const [cfo, setCfo] = useState(defaultState.cfo)
 
     const cfoMultiplier = cfo ? 1.5 : 1
     const normalProfit = normalSales * unitPrice
-    const gardenProfit = gardenSales * unitPrice * 2
+    const gardenOrParkProfit = gardenOrParkSales * unitPrice * 2
+    const gardenAndParkProfit = gardenAndParkSales * unitPrice * 3
     const marketingProfit = (marketingBonuses * 5)
-    const profit = Math.ceil(cfoMultiplier * (normalProfit + gardenProfit + marketingProfit))
+    const profit = Math.ceil(cfoMultiplier * (normalProfit + gardenOrParkProfit + gardenAndParkProfit + marketingProfit))
 
     const reset = () => {
         setUnitPrice(defaultState.unitPrice)
         setNormalSales(defaultState.normalSales)
-        setGardenSales(defaultState.gardenSales)
+        setGardenOrParkSales(defaultState.gardenOrParkSales)
+        setGardenAndParkSales(defaultState.gardenAndParkSales)
         setMarketingBonuses(defaultState.marketingBonuses)
         setCfo(defaultState.cfo)
     }
@@ -47,9 +50,16 @@ function BulkCalc() {
 
                     <TextField
                         type="number"
-                        label="Garden Sales"
-                        value={gardenSales}
-                        onChange={setGardenSales}
+                        label="Either Garden or Park Sales"
+                        value={gardenOrParkSales}
+                        onChange={setGardenOrParkSales}
+                    />
+
+                    <TextField
+                        type="number"
+                        label="Both Garden and Park Sales"
+                        value={gardenAndParkSales}
+                        onChange={setGardenAndParkSales}
                     />
 
                     <TextField
@@ -73,9 +83,10 @@ function BulkCalc() {
 const defaultState = {
     unitPrice: 10,
     normalSales: 0,
-    gardenSales: 0,
+    gardenOrParkSales: 0,
+    gardenAndParkSales: 0,
     marketingBonuses: 0,
     cfo: false
 }
 
-export default BulkCalc
+export default BulkHouseSales
