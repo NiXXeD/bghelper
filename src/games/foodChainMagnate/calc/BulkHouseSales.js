@@ -10,7 +10,7 @@ import Checkbox from '../../../shared/Checkbox'
 import UnitPrices from './UnitPrices'
 import Profit from './Profit'
 
-function BulkHouseSales() {
+function BulkHouseSales({modules}) {
     const [unitPrice, setUnitPrice] = useState(defaultState.unitPrice)
     const [normalSales, setNormalSales] = useState(defaultState.normalSales)
     const [gardenOrParkSales, setGardenOrParkSales] = useState(defaultState.gardenOrParkSales)
@@ -38,7 +38,7 @@ function BulkHouseSales() {
     }
 
     return (
-        <Card>
+        <Card width='auto' maxWidth={375}>
             <CardHeader title='Bulk Sale Calculator'/>
             <CardContent>
                 <FormGroup>
@@ -49,7 +49,7 @@ function BulkHouseSales() {
                         label='Normal Sales'
                         value={normalSales}
                         onChange={setNormalSales}
-                        helperText='Regular demand, Coffee, Kimchi, Sushi, and Noodles.'
+                        helperText='Regular demand, Coffee, Kimchi, Sushi, and/or Noodles.'
                     />
 
                     <TextField
@@ -60,14 +60,16 @@ function BulkHouseSales() {
                         helperText='Items sold on either Garden or Park (not both).'
                     />
 
-                    <TextField
-                        type='number'
-                        label='Both Garden and Park Sales'
-                        value={gardenAndParkSales}
-                        onChange={setGardenAndParkSales}
-                        helperText='Items sold on both Garden and Park.'
-                    />
-
+                    {
+                        modules.lobbyists &&
+                        <TextField
+                            type='number'
+                            label='Both Garden and Park Sales'
+                            value={gardenAndParkSales}
+                            onChange={setGardenAndParkSales}
+                            helperText='Items sold on both Garden and Park.'
+                        />
+                    }
                     <TextField
                         type='number'
                         label='Marketing Bonuses'
@@ -76,14 +78,16 @@ function BulkHouseSales() {
                         helperText='Bonuses from first sale milestones.'
                     />
 
-                    <TextField
-                        type='number'
-                        label='Fry Sales'
-                        value={frySales}
-                        onChange={setFrySales}
-                        helperText='Number of fries sold.'
-                    />
-
+                    {
+                        modules.fryChefs &&
+                        <TextField
+                            type='number'
+                            label='Fry Sales'
+                            value={frySales}
+                            onChange={setFrySales}
+                            helperText='Number of fries sold.'
+                        />
+                    }
                     <Checkbox label='CFO Bonus' checked={cfo} onChange={setCfo}/>
                 </FormGroup>
             </CardContent>

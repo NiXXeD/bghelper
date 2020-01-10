@@ -2,10 +2,11 @@ import {makeStyles} from '@material-ui/styles'
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
 
-function LabelValueDisplay({label, value, dense}) {
+function LabelValueDisplay({className, label, value, dense}) {
     const classes = useStyles()
+    const containerClass = (className || '') + (dense ? '' : ' ' + classes.subheading)
     return (
-        <div className={dense ? null : classes.subheading}>
+        <div className={containerClass}>
             <Typography variant="subtitle1" color="textSecondary" component="div">
                 {label}
             </Typography>

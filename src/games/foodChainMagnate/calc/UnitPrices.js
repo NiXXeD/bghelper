@@ -2,7 +2,7 @@ import React from 'react'
 import Dropdown from '../../../shared/Dropdown'
 
 function UnitPrices(props) {
-    const items = [...new Array(26)]
+    const items = [...new Array(36)]
         .map((v, i) => i - 5)
         .map(value => ({label: `$${value}`, value}))
 

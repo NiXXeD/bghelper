@@ -1,13 +1,14 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/styles'
+import FlexSpacer from '../../../shared/FlexSpacer'
 
 function Milestone({index, milestone, onChange, value}) {
     const classes = useStyles()
-    const {color, title, text, maxRoundTwo} = milestone
+    const {color, title, text, maxRound} = milestone
 
     const handleClick = () => {
         let nextValue
-        if (value === 'available') nextValue = 'mine'
+        if (!value || value === 'available') nextValue = 'mine'
         else if (value === 'mine') nextValue = 'unavailable'
         else nextValue = 'available'
 
@@ -25,7 +26,9 @@ function Milestone({index, milestone, onChange, value}) {
             <div className={classes.container}>
                 <div className={classes.title}>First {title}</div>
                 <div className={classes.text}>{text}</div>
-                {maxRoundTwo && <div className={classes.maxRoundTwo}>Remove after<br/>round two</div>}
+                <FlexSpacer/>
+                {
+                    maxRound && <div className={classes.maxRound}>Remove after <br/>round {maxRound}</div>}
             </div>
         </div>
     )
@@ -42,7 +45,10 @@ const useStyles = makeStyles({
         borderRadius: 10
     },
     container: {
-        margin: 4
+        margin: 4,
+        height: 145,
+        display: 'flex',
+        flexDirection: 'column'
     },
     title: {
         textAlign: 'center',
@@ -56,28 +62,26 @@ const useStyles = makeStyles({
         fontSize: 'small',
         color: '#000'
     },
-    maxRoundTwo: {
+    maxRound: {
         width: 145,
         textAlign: 'center',
         fontWeight: 'bold',
         fontSize: 'small',
-        color: '#f00',
-        position: 'absolute',
-        bottom: 4
+        color: '#f00'
     },
     checkmark: {
         fontSize: 'xx-large',
         color: '#0f0',
         position: 'absolute',
-        left: 2,
-        bottom: 0
+        marginTop: 115,
+        marginLeft: 7
     },
     x: {
         fontSize: 'xx-large',
         color: '#f00',
         position: 'absolute',
-        left: 4,
-        bottom: 0
+        marginTop: 115,
+        marginLeft: 7
     }
 })
 

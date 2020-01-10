@@ -1,117 +1,71 @@
-import FormControlLabel from '@material-ui/core/FormControlLabel'
 import {makeStyles} from '@material-ui/styles'
-import React, {useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import Card from '../../../shared/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardHeader from '@material-ui/core/CardHeader'
 import Button from '@material-ui/core/Button'
-import Masonry from 'react-masonry-component'
-import FlexRow from '../../../shared/FlexRow'
-import FlexSpacer from '../../../shared/FlexSpacer'
-import {originalMilestoneData, alternateMilestoneData} from './milestoneData'
+import Grid from '@material-ui/core/Grid'
+import milestoneData from './milestoneData'
 import Milestone from './Milestone'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import Radio from '@material-ui/core/Radio'
 
-function Milestones() {
+function Milestones({modules, data, onDataChanged}) {
     const classes = useStyles()
+    const [milestoneState, setMilestoneState] = useState(data.milestones || [])
 
-    const getDataArray = (type = milestoneType) => {
-        const data = type === 'original' ? originalMilestoneData : alternateMilestoneData
-        return data.map(() => 'available')
+    const milestones = useMemo(() => ([
+        ...(!modules.hardChoices && !modules.newMilestones ? milestoneData.base : []),
+        ...(modules.hardChoices && !modules.newMilestones ? milestoneData.hardChoices : []),
+        ...(modules.newMilestones ? milestoneData.expansion : []),
+        ...(modules.ketchup ? milestoneData.ketchup : [])
+    ]), [modules])
+
+    const updateMilestoneType = useCallback(() => {
+        onDataChanged('milestoneType', {
+            newMilestones: modules.newMilestones,
+            ketchup: modules.ketchup
+        })
+    }, [modules, onDataChanged])
+
+    const milestoneChanged = (index, value) => {
+        const newMilestoneState = [...milestoneState]
+        newMilestoneState[index] = value
+        setMilestoneState(newMilestoneState)
+        onDataChanged('milestones', newMilestoneState)
+        updateMilestoneType()
     }
 
-    const [{milestones, milestoneType}, setMilestones] = useState(() => {
-        try {
-            const oldStorageData = localStorage.getItem(localStorageKey)
-            const parsedData = JSON.parse(oldStorageData)
-            if (parsedData && parsedData.milestones && parsedData.milestoneType) {
-                return parsedData
-            }
-        } catch (ex) {
-            console.warn('Error loading local storage data: ', ex)
-            localStorage.removeItem(localStorageKey)
-        }
-        return {
-            milestones: getDataArray('original'),
-            milestoneType: 'original'
-        }
-    })
+    const handleReset = useCallback(() => {
+        setMilestoneState([])
+        onDataChanged('milestones', [])
+        updateMilestoneType()
+    }, [onDataChanged, updateMilestoneType])
 
     useEffect(() => {
-        const data = JSON.stringify({milestones, milestoneType})
-        localStorage.setItem(localStorageKey, data)
-    }, [milestones, milestoneType])
+        const {milestoneType = {}} = data
+        const newMilestonesChanged = milestoneType.newMilestones !== modules.newMilestones
+        const ketchupChanged = milestoneType.ketchup !== modules.ketchup
+        if (newMilestonesChanged || ketchupChanged) handleReset()
+    }, [data, modules, handleReset])
 
-    const reset = () => {
-        const newMilestones = getDataArray()
-        setMilestones({milestones: newMilestones, milestoneType})
-
-        const newValue = JSON.stringify({
-            milestones: newMilestones,
-            milestoneType
-        })
-        localStorage.setItem(localStorageKey, newValue)
-    }
-
-    const updateMilestones = (index, value) => {
-        const newMilestones = [...milestones]
-        newMilestones[index] = value
-        setMilestones({milestones: newMilestones, milestoneType})
-    }
-
-    const handleMilestoneSetChange = event => {
-        const newType = event.target.value
-        if (newType !== milestoneType) {
-            // set defaults
-            setMilestones({
-                milestones: getDataArray(newType),
-                milestoneType: newType
-            })
-        }
-    }
-
-    const milestoneData = milestoneType === 'original' ? originalMilestoneData : alternateMilestoneData
     return (
-        <Card width='auto' maxWidth={900}>
-            <CardHeader title="Milestone Tracker"/>
+        <Card width='auto' maxWidth={845}>
+            <CardHeader title='Milestone Tracker'/>
             <CardContent className={classes.content}>
-                <Masonry>
-                    {milestones.map((value, key) =>
+                <Grid container>
+                    {milestones.map((value, index) =>
                         <Milestone
-                            key={key}
-                            index={key}
-                            milestone={milestoneData[key]}
-                            value={value}
-                            onChange={updateMilestones}
+                            key={index}
+                            index={index}
+                            milestone={value}
+                            value={milestoneState[index]}
+                            onChange={milestoneChanged}
                         />
                     )}
-                </Masonry>
+                </Grid>
             </CardContent>
             <CardActions>
-                <Button color="secondary" onClick={reset}>Reset</Button>
-
-                <FlexSpacer/>
-
-                <RadioGroup
-                    name="milestoneType"
-                    value={milestoneType}
-                    onChange={handleMilestoneSetChange}
-                >
-                    <FlexRow>
-                        <FormControlLabel
-                            value="original"
-                            control={<Radio/>}
-                            label="Original"
-                        />
-                        <FormControlLabel
-                            value="alternate"
-                            control={<Radio/>}
-                            label="Alternate"
-                        />
-                    </FlexRow>
-                </RadioGroup>
+                <Button color='secondary' onClick={handleReset}>Reset</Button>
             </CardActions>
         </Card>
     )
@@ -122,7 +76,5 @@ const useStyles = makeStyles({
         padding: 8
     }
 })
-
-export const localStorageKey = 'milestones'
 
 export default Milestones

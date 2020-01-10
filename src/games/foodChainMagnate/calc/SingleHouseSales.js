@@ -10,7 +10,7 @@ import Dropdown from '../../../shared/Dropdown'
 import UnitPrices from './UnitPrices'
 import Profit from './Profit'
 
-function SingleHouseSales() {
+function SingleHouseSales({modules}) {
     const [bonusItemsSold, setBonusItemsSold] = useState(defaultState.bonusItemsSold)
     const [cfo, setCfo] = useState(defaultState.cfo)
     const [garden, setGarden] = useState(defaultState.garden)
@@ -70,24 +70,29 @@ function SingleHouseSales() {
                         helperText='Bonuses from first sale milestones.'
                     />
 
-                    <Dropdown
-                        label='Special Items Sold'
-                        value={specialItemsSold}
-                        onChange={setSpecialItemsSold}
-                        items={itemsSoldMenuItems}
-                        helperText='Includes Coffee, Kimchi, Sushi, and Noodles.'
-                    />
+                    {
+                        (modules.coffee || modules.kimchi || modules.sushi || modules.noodles) &&
+                        <Dropdown
+                            label='Special Items Sold'
+                            value={specialItemsSold}
+                            onChange={setSpecialItemsSold}
+                            items={itemsSoldMenuItems}
+                            helperText='Includes Coffee, Kimchi, Sushi, and Noodles.'
+                        />
+                    }
 
-                    <Dropdown
-                        label='Fries Sold'
-                        value={friesSold}
-                        onChange={setFriesSold}
-                        items={itemsSoldMenuItems}
-                        helperText='Includes Coffee, Kimchi, Sushi, and Noodles.'
-                    />
-
+                    {
+                        modules.fryChefs &&
+                        <Dropdown
+                            label='Fries Sold'
+                            value={friesSold}
+                            onChange={setFriesSold}
+                            items={itemsSoldMenuItems}
+                            helperText='Includes Coffee, Kimchi, Sushi, and Noodles.'
+                        />
+                    }
                     <Checkbox label='Garden House' checked={garden} onChange={setGarden}/>
-                    <Checkbox label='Park Bonus' checked={park} onChange={setPark}/>
+                    {modules.lobbyists && <Checkbox label='Park Bonus' checked={park} onChange={setPark}/>}
                     <Checkbox label='CFO Bonus' checked={cfo} onChange={setCfo}/>
                 </FormGroup>
             </CardContent>
