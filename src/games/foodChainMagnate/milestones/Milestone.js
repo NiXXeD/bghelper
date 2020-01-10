@@ -4,7 +4,7 @@ import FlexSpacer from '../../../shared/FlexSpacer'
 
 function Milestone({index, milestone, onChange, value}) {
     const classes = useStyles()
-    const {color, title, text, maxRound} = milestone
+    const {color, fontColor = '#000000', title, text, maxRound} = milestone
 
     const handleClick = () => {
         let nextValue
@@ -24,8 +24,8 @@ function Milestone({index, milestone, onChange, value}) {
             {value === 'mine' && <div className={classes.checkmark}>✓</div>}
             {value === 'unavailable' && <div className={classes.x}>✗</div>}
             <div className={classes.container}>
-                <div className={classes.title}>First {title}</div>
-                <div className={classes.text}>{text}</div>
+                <div className={classes.title} style={{color: fontColor}}>First {title}</div>
+                <div className={classes.text} style={{color: fontColor}}>{text}</div>
                 <FlexSpacer/>
                 {
                     maxRound && <div className={classes.maxRound}>Remove after <br/>round {maxRound}</div>}

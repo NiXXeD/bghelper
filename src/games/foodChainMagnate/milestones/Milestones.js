@@ -16,13 +16,17 @@ function Milestones({modules, data, onDataChanged}) {
     const milestones = useMemo(() => ([
         ...(!modules.hardChoices && !modules.newMilestones ? milestoneData.base : []),
         ...(modules.hardChoices && !modules.newMilestones ? milestoneData.hardChoices : []),
-        ...(modules.newMilestones ? milestoneData.expansion : []),
-        ...(modules.ketchup ? milestoneData.ketchup : [])
+        ...(modules.newMilestones ? milestoneData.newMilestones : []),
+        ...(modules.coffee ? milestoneData.coffee : []),
+        ...(modules.lobbyists ? milestoneData.lobbyists : []),
+        ...(modules.ketchup ? milestoneData.ketchup : []),
     ]), [modules])
 
     const updateMilestoneType = useCallback(() => {
         onDataChanged('milestoneType', {
             newMilestones: modules.newMilestones,
+            coffee: modules.coffee,
+            lobbyists: modules.lobbyists,
             ketchup: modules.ketchup
         })
     }, [modules, onDataChanged])
@@ -44,8 +48,10 @@ function Milestones({modules, data, onDataChanged}) {
     useEffect(() => {
         const {milestoneType = {}} = data
         const newMilestonesChanged = milestoneType.newMilestones !== modules.newMilestones
+        const coffeeChanged = milestoneType.coffee !== modules.coffee
+        const lobbyistChanged = milestoneType.lobbyists !== modules.lobbyists
         const ketchupChanged = milestoneType.ketchup !== modules.ketchup
-        if (newMilestonesChanged || ketchupChanged) handleReset()
+        if (newMilestonesChanged || coffeeChanged || lobbyistChanged || ketchupChanged) handleReset()
     }, [data, modules, handleReset])
 
     return (
