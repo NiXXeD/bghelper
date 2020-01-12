@@ -13,22 +13,24 @@ function Milestones({modules, data, onDataChanged}) {
     const classes = useStyles()
     const [milestoneState, setMilestoneState] = useState(data.milestones || [])
 
-    const milestones = useMemo(() => ([
-        ...(!modules.hardChoices && !modules.newMilestones ? milestoneData.base : []),
-        ...(modules.hardChoices && !modules.newMilestones ? milestoneData.hardChoices : []),
-        ...(modules.newMilestones ? milestoneData.newMilestones : []),
-        ...(modules.coffee ? milestoneData.coffee : []),
-        ...(modules.lobbyists ? milestoneData.lobbyists : []),
-        ...(modules.ketchup ? milestoneData.ketchup : []),
-    ]), [modules])
+    const milestones = useMemo(() => {
+        return [
+            ...(!modules.hardChoices && !modules.newMilestones ? milestoneData.base : []),
+            ...(modules.hardChoices && !modules.newMilestones ? milestoneData.hardChoices : []),
+            ...(milestoneModules
+                    .map(module => modules[module] ? milestoneData[module] : null)
+                    .filter(x => x)
+                    .reduce((acc, val) => ([...acc, ...val]), [])
+            ),
+        ].sort((a, b) => a.color.localeCompare(b.color))
+    }, [modules])
 
     const updateMilestoneType = useCallback(() => {
-        onDataChanged('milestoneType', {
-            newMilestones: modules.newMilestones,
-            coffee: modules.coffee,
-            lobbyists: modules.lobbyists,
-            ketchup: modules.ketchup
-        })
+        const milestoneTypeData = milestoneModules.reduce((acc, val) => {
+            acc[val] = modules[val]
+            return acc
+        }, {})
+        onDataChanged('milestoneType', milestoneTypeData)
     }, [modules, onDataChanged])
 
     const milestoneChanged = (index, value) => {
@@ -47,11 +49,8 @@ function Milestones({modules, data, onDataChanged}) {
 
     useEffect(() => {
         const {milestoneType = {}} = data
-        const newMilestonesChanged = milestoneType.newMilestones !== modules.newMilestones
-        const coffeeChanged = milestoneType.coffee !== modules.coffee
-        const lobbyistChanged = milestoneType.lobbyists !== modules.lobbyists
-        const ketchupChanged = milestoneType.ketchup !== modules.ketchup
-        if (newMilestonesChanged || coffeeChanged || lobbyistChanged || ketchupChanged) handleReset()
+        const modulesChanged = milestoneModules.some(module => milestoneType[module] !== modules[module])
+        if (modulesChanged) handleReset()
     }, [data, modules, handleReset])
 
     return (
@@ -76,6 +75,14 @@ function Milestones({modules, data, onDataChanged}) {
         </Card>
     )
 }
+
+const milestoneModules = [
+    'newMilestones',
+    'coffee',
+    'lobbyists',
+    'ruralMarketers',
+    'ketchup'
+]
 
 const useStyles = makeStyles({
     content: {
