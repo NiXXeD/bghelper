@@ -6,9 +6,9 @@ import Tab from '@material-ui/core/Tab'
 import TitleContext from './TitleContext'
 import Box from '@material-ui/core/Box'
 
-function Tabs({tabs, title}) {
+function Tabs({tabs, title, defaultTab = 0}) {
     const classes = useStyles()
-    const [tabValue, setTabValue] = useState(0)
+    const [tabValue, setTabValue] = useState(defaultTab)
     const handleChange = (event, value) => setTabValue(value)
 
     const {setTitle, clearTitle} = useContext(TitleContext)

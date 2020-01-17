@@ -5,6 +5,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import React from 'react'
 import Card from '../../../shared/Card'
+import FlexSpacer from '../../../shared/FlexSpacer'
 import LabelValueDisplay from '../../../shared/LabelValueDisplay'
 import ExpansionModule from './ExpansionModule'
 import Grid from '@material-ui/core/Grid'
@@ -12,7 +13,21 @@ import expansionModuleData from './expansionModuleData'
 
 function ExpansionModules({modules, onModulesChanged}) {
     const classes = useStyles()
-    const reset = () => onModulesChanged({})
+    const handleClear = () => onModulesChanged({})
+    const handleInvert = () => {
+        const value = expansionModuleData.reduce((acc, {prop}) => {
+            acc[prop] = !modules[prop]
+            return acc
+        }, {})
+        onModulesChanged(value)
+    }
+    const handleSelectAll = () => {
+        const value = expansionModuleData.reduce((acc, {prop}) => {
+            acc[prop] = true
+            return acc
+        }, {})
+        onModulesChanged(value)
+    }
 
     return (
         <Card width='auto' maxWidth={500}>
@@ -38,7 +53,10 @@ function ExpansionModules({modules, onModulesChanged}) {
                 </Grid>
             </CardContent>
             <CardActions>
-                <Button color='secondary' onClick={reset}>Reset</Button>
+                <Button color='secondary' onClick={handleClear}>Clear</Button>
+                <FlexSpacer/>
+                <Button onClick={handleInvert}>Invert</Button>
+                <Button onClick={handleSelectAll}>Select All</Button>
             </CardActions>
         </Card>
     )
