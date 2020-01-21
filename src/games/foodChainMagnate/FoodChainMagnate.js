@@ -1,5 +1,6 @@
 import React, {useCallback, useState} from 'react'
 import Tabs from '../../shared/Tabs'
+import useStorageData from '../../shared/useStorageData'
 import BulkHouseSales from './calc/BulkHouseSales'
 import SingleHouseSales from './calc/SingleHouseSales'
 import Milestones from './milestones/Milestones'
@@ -7,31 +8,14 @@ import ExpansionModules from './modules/ExpansionModules'
 import Setup from './setup/Setup'
 
 function FoodChainMagnate() {
-    const [data = {}, setData] = useState(() => {
-        try {
-            const oldStorageData = localStorage.getItem(localStorageKey)
-            // TODO: validate parsed data
-            return JSON.parse(oldStorageData) || {}
-        } catch (ex) {
-            console.warn('Error loading local storage data: ', ex)
-            localStorage.removeItem(localStorageKey)
-        }
-        return {}
-    })
-
+    // TODO: validate data
+    const {data, onDataUpdate} = useStorageData({localStorageKey})
     const [modules, setModules] = useState(data.modules || {})
-
-    const handleDataUpdate = useCallback((prop, value) => {
-        const newData = {...data, [prop]: value}
-        setData(newData)
-        const newValue = JSON.stringify(newData)
-        localStorage.setItem(localStorageKey, newValue)
-    }, [data])
 
     const handleModulesChanged = useCallback(newModules => {
         setModules(newModules)
-        handleDataUpdate('modules', newModules)
-    }, [handleDataUpdate])
+        onDataUpdate('modules', newModules)
+    }, [onDataUpdate])
 
     const tabs = [
         {
@@ -39,7 +23,7 @@ function FoodChainMagnate() {
             alwaysRender: false,
             content: <Milestones
                 data={data}
-                onDataChanged={handleDataUpdate}
+                onDataChanged={onDataUpdate}
                 modules={modules}
             />
         },
@@ -50,14 +34,14 @@ function FoodChainMagnate() {
             label: 'Modules',
             content: <ExpansionModules
                 data={data}
-                onDataChanged={handleDataUpdate}
-                onDataUpdate={handleDataUpdate}
+                onDataChanged={onDataUpdate}
+                onDataUpdate={onDataUpdate}
                 modules={modules}
                 onModulesChanged={handleModulesChanged}
             />
         }
     ]
-    return <Tabs title={'Food Chain Magnate'} tabs={tabs}/>
+    return <Tabs title='Food Chain Magnate' tabs={tabs}/>
 }
 
 const localStorageKey = 'foodChainMagnateData'
