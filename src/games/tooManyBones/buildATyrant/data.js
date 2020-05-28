@@ -6,7 +6,7 @@ export default {
             ini: 2,
             att: 1,
             def: 0,
-            types: ['bog', 'orc']
+            types: ['Bog', 'Orc']
         },
         {
             name: 'Grunting Tromper',
@@ -14,7 +14,7 @@ export default {
             ini: 3,
             att: 1,
             def: 0,
-            types: ['troll', 'orc']
+            types: ['Troll', 'Orc']
         },
         {
             name: 'Stout Raiding',
@@ -22,7 +22,7 @@ export default {
             ini: 3,
             att: 1,
             def: 0,
-            types: ['troll', 'dragon']
+            types: ['Troll', 'Dragon']
         },
         {
             name: 'Troubled Trollbold',
@@ -30,7 +30,7 @@ export default {
             ini: 3,
             att: 1,
             def: 1,
-            types: ['troll', 'dragon']
+            types: ['Troll', 'Dragon']
         },
         {
             name: 'Orc Witness',
@@ -38,7 +38,7 @@ export default {
             ini: 3,
             att: 1,
             def: 0,
-            types: ['beast', 'orc']
+            types: ['Beast', 'Orc']
         },
         {
             name: 'Swampkin Monkey',
@@ -46,7 +46,7 @@ export default {
             ini: 4,
             att: 2,
             def: 0,
-            types: ['bog', 'beast']
+            types: ['Bog', 'Beast']
         },
         {
             name: 'Neander Troll',
@@ -54,7 +54,7 @@ export default {
             ini: 2,
             att: 1,
             def: 1,
-            types: ['troll', 'beast']
+            types: ['Troll', 'Beast']
         },
         {
             name: 'Goblin Firecaster',
@@ -62,7 +62,7 @@ export default {
             ini: 4,
             att: 1,
             def: 0,
-            types: ['dragon', 'goblin']
+            types: ['Dragon', 'Goblin']
         }
     ],
     five: [
@@ -72,7 +72,7 @@ export default {
             ini: 3,
             att: 2,
             def: 1,
-            types: ['troll', 'beast']
+            types: ['Troll', 'Beast']
         },
         {
             name: 'Shadow Keeper',
@@ -80,7 +80,7 @@ export default {
             ini: 3,
             att: 0,
             def: 1,
-            types: ['bog', 'dragon']
+            types: ['Bog', 'Dragon']
         },
         {
             name: 'Sandbaggin Brute',
@@ -88,7 +88,7 @@ export default {
             ini: 4,
             att: 3,
             def: 1,
-            types: ['troll', 'goblin']
+            types: ['Troll', 'Goblin']
         },
         {
             name: 'Sculpted Guru',
@@ -96,7 +96,7 @@ export default {
             ini: 4,
             att: 2,
             def: 2,
-            types: ['bog', 'goblin']
+            types: ['Bog', 'Goblin']
         },
         {
             name: 'Sonar Troll',
@@ -104,7 +104,7 @@ export default {
             ini: 3,
             att: 3,
             def: 0,
-            types: ['troll', 'beast']
+            types: ['Troll', 'Beast']
         },
         {
             name: 'Miniphage',
@@ -112,7 +112,7 @@ export default {
             ini: 4,
             att: 2,
             def: 0,
-            types: ['beast']
+            types: ['Beast']
         },
         {
             name: 'Wiser Golden Troll Ultra',
@@ -120,7 +120,7 @@ export default {
             ini: 2,
             att: 2,
             def: 2,
-            types: ['bog', 'troll']
+            types: ['Bog', 'Troll']
         },
         {
             name: 'Feathered Dragon',
@@ -128,7 +128,7 @@ export default {
             ini: 5,
             att: 3,
             def: 2,
-            types: ['dragon', 'beast']
+            types: ['Dragon', 'Beast']
         }
     ]
 }
