@@ -8,7 +8,7 @@ function Barenpark() {
         {label: 'Setup', content: <Setup/>},
         {label: 'Achievements', content: <Achievements/>}
     ]
-    return <Tabs title={'Bärenpark'} tabs={tabs}/>
+    return <Tabs title='Bärenpark' tabs={tabs}/>
 
 }
 
