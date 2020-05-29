@@ -28,7 +28,7 @@ function BuildATyrant() {
     }, [increment])
 
     return (
-        <Card width={275}>
+        <Card width={300}>
             <CardHeader title="Build A Tyrant Splicer"/>
             <CardContent>
                 <FlexRow>
@@ -49,13 +49,19 @@ function BuildATyrant() {
                     </FlexCol>
                 </FlexRow>
 
-                <LabelValueDisplay label='Baddie Types' value={
-                    types.map(type => <FlexRow>{type}</FlexRow>)
-                }/>
+                <FlexRow>
+                    <FlexCol width={140}>
+                        <LabelValueDisplay label='Baddie Types' value={
+                            types.map(type => <FlexRow>{type}</FlexRow>)
+                        }/>
+                    </FlexCol>
 
-                <LabelValueDisplay label='Baddies Used' value={
-                    baddies.map(name => <FlexRow>{name}</FlexRow>)
-                }/>
+                    <FlexCol width={140}>
+                        <LabelValueDisplay label='Baddies Used' value={
+                            baddies.map(name => <FlexRow>{name}</FlexRow>)
+                        }/>
+                    </FlexCol>
+                </FlexRow>
             </CardContent>
             <CardActions>
                 <FlexSpacer/>
