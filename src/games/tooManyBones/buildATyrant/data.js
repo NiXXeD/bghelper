@@ -83,7 +83,7 @@ export default {
             types: ['Bog', 'Dragon']
         },
         {
-            name: 'Sandbaggin Brute',
+            name: 'Sandbaggin\' Brute',
             hp: 5,
             ini: 4,
             att: 3,
