@@ -25,7 +25,7 @@ export default {
         grizzlyToilets: 18,
         grizzlyAnimalHouses: '2 - 7',
         grizzlyBearStatues: '3 - 17',
-        players: ['Toilet', 'Playground', 'Playground']
+        players: ['Toilet', 'Playground', 'Food Street']
     },
     4: {
         toilets: 10,
