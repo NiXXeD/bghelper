@@ -11,7 +11,7 @@ export default {
         grizzlyToilets: 18,
         grizzlyAnimalHouses: '2, 4, 6, 8',
         grizzlyBearStatues: 'Evens; 2 - 20',
-        players: ['Toilet', 'Playground']
+        startingTile: ['Toilet', 'Playground']
     },
     3: {
         toilets: 10,
@@ -25,7 +25,7 @@ export default {
         grizzlyToilets: 18,
         grizzlyAnimalHouses: '2 - 7',
         grizzlyBearStatues: '3 - 17',
-        players: ['Toilet', 'Playground', 'Food Street']
+        startingTile: ['Toilet', 'Playground', 'Food Street']
     },
     4: {
         toilets: 10,
@@ -39,6 +39,6 @@ export default {
         grizzlyToilets: 18,
         grizzlyAnimalHouses: '1 - 8',
         grizzlyBearStatues: '1 - 20',
-        players: ['Toilet', 'Playground', 'Playground', 'Food Street']
+        startingTile: ['Toilet', 'Playground', 'Playground', 'Food Street']
     }
 }

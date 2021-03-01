@@ -36,12 +36,12 @@ function Setup() {
                             value={
                                 <FlexRow>
                                     <FlexCol width={140}>
-                                        <span><b>P1:</b>&nbsp;Toilet</span>
-                                        {players > 2 && <span><b>P3:</b>&nbsp;Playground</span>}
+                                        <span><b>P1:</b>&nbsp;{data.startingTile[0]}</span>
+                                        {players > 2 && <span><b>P3:</b>&nbsp;{data.startingTile[2]}</span>}
                                     </FlexCol>
                                     <FlexCol width={140}>
-                                        <span><b>P2:</b>&nbsp;Playground</span>
-                                        {players > 3 && <span><b>P4:</b>&nbsp;Food Street</span>}
+                                        <span><b>P2:</b>&nbsp;{data.startingTile[1]}</span>
+                                        {players > 3 && <span><b>P4:</b>&nbsp;{data.startingTile[3]}</span>}
                                     </FlexCol>
                                 </FlexRow>
                             }
